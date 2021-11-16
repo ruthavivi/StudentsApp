@@ -7,7 +7,7 @@ public class Model {
     static final public Model instance = new Model();
 
     private  Model(){
-        for (int i=0; i<100;i++){
+        for (int i=0; i<10;i++){
             Student student = new Student();
             student.id = "000" + i;
             student.name = "Kuku" + i;
