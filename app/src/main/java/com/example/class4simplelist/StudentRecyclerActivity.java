@@ -44,6 +44,9 @@ public class StudentRecyclerActivity extends AppCompatActivity {
                 Log.d("TAG", "row was clicked " + position);
                 Intent intent = new Intent(StudentRecyclerActivity.this, StudentInfoActivity.class);
                 intent.putExtra("id",data.get(position).id);
+                intent.putExtra("name",data.get(position).name);
+                intent.putExtra("position",position);
+
                 startActivity(intent);
             }
 
@@ -72,6 +75,7 @@ public class StudentRecyclerActivity extends AppCompatActivity {
         TextView nameTv;
         TextView idTv;
         CheckBox cb;
+
         public MyViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
             nameTv = itemView.findViewById(R.id.list_row_name_tv);
@@ -83,6 +87,7 @@ public class StudentRecyclerActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
                     listener.onItemClick(pos);
+
                 }
             });
             cb.setOnClickListener(new View.OnClickListener() {
@@ -95,17 +100,16 @@ public class StudentRecyclerActivity extends AppCompatActivity {
             });
         }
 
-        public void bind(Student student) {
-            nameTv.setText(student.name);
-            idTv.setText(student.id);
-            cb.setChecked(student.cb);
-        }
+
     }
 
     public interface OnItemClickListener{
         void onItemClick(int position);
     }
+
     public class MyAdapter extends RecyclerView.Adapter<MyViewHolder>{
+
+
         private OnItemClickListener listener;
 
         void setOnItemClickListener(OnItemClickListener listener){
@@ -124,7 +128,9 @@ public class StudentRecyclerActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
             Student student = data.get(position);
-            holder.bind(student);
+            holder.idTv.setText(student.id);
+            holder.nameTv.setText(student.name);
+            holder.cb.setChecked(student.cb);
         }
 
         @Override

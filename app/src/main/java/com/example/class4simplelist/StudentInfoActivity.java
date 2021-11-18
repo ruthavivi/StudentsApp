@@ -18,7 +18,14 @@ public class StudentInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_student_info);
         Intent intent=getIntent();
         String id=intent.getStringExtra("id");
+        String name1=intent.getStringExtra("name");
+        int  position=getIntent().getExtras().getInt("position");
         TextView text=findViewById(R.id.StudentInfo_text_v);
+        TextView name=findViewById(R.id.details_name_tv);
+        name.setText(name1);
+
+        TextView id_s=findViewById(R.id.details_id_tv);
+        id_s.setText(id);
         Model.instance.getStudentById(id);
         text.setText(id);
 
@@ -29,6 +36,8 @@ public class StudentInfoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 System.out.println("Button Clicked");
                 Intent intent1 = new Intent(StudentInfoActivity.this, EditStudentActivity.class);
+                intent1.putExtra("position",position);
+
                 startActivity(intent1);
             }
         });

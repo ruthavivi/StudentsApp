@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.class4simplelist.model.Model;
+import com.example.class4simplelist.model.Student;
+
 public class EditStudentActivity extends AppCompatActivity {
 
 
@@ -16,9 +19,15 @@ public class EditStudentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_student);
+        Intent intent=getIntent();
+        String id1=intent.getStringExtra("id");
+        String name1=intent.getStringExtra("name");
         TextView text=findViewById(R.id.editStudent);
-        EditText name=findViewById(R.id.new_name_et);
-        EditText id=findViewById(R.id.new_id_tv);
+
+
+        final String position=getIntent().getExtras().getString("position");
+
+
         Button cancel=findViewById(R.id.cancel2);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,7 +42,18 @@ public class EditStudentActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ////להוסיף כאן אופציה של שמירת סטודנט שהוכנס
-                EditStudentActivity.super.onBackPressed();
+                EditText name=findViewById(R.id.new_name_et);
+                EditText id=findViewById(R.id.new_id_tv);
+                String name1=name.getText().toString();
+                String id1=id.getText().toString();
+                boolean cb=true;
+                int  position=getIntent().getExtras().getInt("position");
+                Student student= new Student(cb,name1,id1);
+                Model.instance.editStudent(position,student);
+
+                Intent intent=new Intent(EditStudentActivity.this,StudentRecyclerActivity.class);
+                startActivity(intent);
+
 
             }
         });
@@ -42,8 +62,12 @@ public class EditStudentActivity extends AppCompatActivity {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ////להוסיף כאן אופציה של מחיקת סטודנט
-                EditStudentActivity.super.onBackPressed();
+                int  position1=getIntent().getExtras().getInt("position");
+                //
+                //להוסיף כאן אופציה של מחיקת סטודנט
+                Model.instance.deleteStudent(position1);
+                Intent intent=new Intent(EditStudentActivity.this,StudentRecyclerActivity.class);
+                startActivity(intent);
 
             }
         });

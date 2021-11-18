@@ -7,7 +7,7 @@ public class Model {
     static final public Model instance = new Model();
 
     private  Model(){
-        for (int i=0; i<10;i++){
+        for (int i=0; i<2;i++){
             Student student = new Student();
             student.id = "000" + i;
             student.name = "Kuku" + i;
@@ -28,5 +28,18 @@ public class Model {
 
     public void addNewStudent(Student student){
         data.add(student);
+    }
+
+    public void editStudent(int pos,Student student) {
+        data.set(pos,student);
+
+
+    }
+
+    public void deleteStudent(int position) {
+        data.remove(position);
+        notifyAll();
+
+
     }
 }
