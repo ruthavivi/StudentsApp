@@ -47,6 +47,7 @@ public class StudentRecyclerActivity extends AppCompatActivity {
                 intent.putExtra("name",data.get(position).name);
                 intent.putExtra("position",position);
 
+
                 startActivity(intent);
             }
 

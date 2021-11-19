@@ -38,7 +38,9 @@ public class Model {
 
     public void deleteStudent(int position) {
         data.remove(position);
-        notifyAll();
+
+
+
 
 
     }

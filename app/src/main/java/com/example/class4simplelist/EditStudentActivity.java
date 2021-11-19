@@ -23,9 +23,10 @@ public class EditStudentActivity extends AppCompatActivity {
         String id1=intent.getStringExtra("id");
         String name1=intent.getStringExtra("name");
         TextView text=findViewById(R.id.editStudent);
+        int  position=getIntent().getExtras().getInt("position");
 
 
-        final String position=getIntent().getExtras().getString("position");
+
 
 
         Button cancel=findViewById(R.id.cancel2);
@@ -47,7 +48,7 @@ public class EditStudentActivity extends AppCompatActivity {
                 String name1=name.getText().toString();
                 String id1=id.getText().toString();
                 boolean cb=true;
-                int  position=getIntent().getExtras().getInt("position");
+
                 Student student= new Student(cb,name1,id1);
                 Model.instance.editStudent(position,student);
 
@@ -62,10 +63,10 @@ public class EditStudentActivity extends AppCompatActivity {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int  position1=getIntent().getExtras().getInt("position");
+
                 //
                 //להוסיף כאן אופציה של מחיקת סטודנט
-                Model.instance.deleteStudent(position1);
+                Model.instance.deleteStudent(position);
                 Intent intent=new Intent(EditStudentActivity.this,StudentRecyclerActivity.class);
                 startActivity(intent);
 
